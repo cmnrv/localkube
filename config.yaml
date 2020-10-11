@@ -1,0 +1,45 @@
+---
+cluster:
+  name: "default"
+  masters: 1
+  workers: 1
+  ports:
+    apiserver: 9999
+    ingress: 8888
+charts:
+  postgres:
+    enabled: true
+    name: "bitnami/postgresql"
+    repository_name: "bitnami"
+    repository_url: "https://charts.bitnami.com/bitnami"
+    namespace: "datastore"
+    parameters:
+      postgresqlPassword: "postgres"
+  pgadmin:
+    enabled: true
+    name: "runix/pgadmin4"
+    repository_name: "runix"
+    repository_url: "https://helm.runix.net"
+    namespace: "datastore"
+    parameters:
+      ingress.enabled: "true"
+      ingress.hosts[0].host: "pgadmin.local"
+      ingress.hosts[0].paths[0]: "/"
+      serverDefinitions.enabled: "true"
+      env.email: "pgadmin@local.dev"
+      env.password: "pgadmin"
+      serverDefinitions.servers: '"1":{"Name": "pg_local"\,"Group": "Servers"\,"Port": 5432\,"Username": "postgres"\,"Host": "postgres-postgresql.datastore.svc.cluster.local"\,"SSLMode": "prefer"\,"MaintenanceDB": "postgres"}'
+  redis:
+    enabled: false
+    name: "bitnami/redis"
+    repository_name: "bitnami"
+    repository_url: "https://charts.bitnami.com/bitnami"
+    namespace: "cache"
+    parameters: []
+  rabbitmq:
+    enabled: false
+    name: "bitnami/rabbitmq"
+    repository_name: "bitnami"
+    repository_url: "https://charts.bitnami.com/bitnami"
+    namespace: "message"
+    parameters: []
