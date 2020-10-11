@@ -17,7 +17,7 @@ Please try and use explicit commit messages. We also tend to commit small change
 
 ## Rebase
 
-Please rebase master instead of merging it when working on a branch and/or pull request.
+Please rebase main instead of merging it when working on a branch and/or pull request.
 
 ## Documentation
 
